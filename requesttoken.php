@@ -3,7 +3,7 @@
     </header>
     <body>
     <?php
-        include "oauthsign.php";
+        include "lib/oauthsign.php";
         // Testing signature
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $oauth_signature = $_POST["oauth_signature"];

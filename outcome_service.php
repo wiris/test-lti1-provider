@@ -1,6 +1,6 @@
 <?php
 // https://www.imsglobal.org/specs/ltiv1p1/implementation-guide#toc-26
-include "oauthsign.php";
+include "lib/oauthsign.php";
 
 $a=file_get_contents(dirname(__FILE__)."/outcome.template.xml");
 $url = $_POST["url"];
