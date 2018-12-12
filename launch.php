@@ -24,7 +24,7 @@
     <br/>
     <a href="<?php echo $back_link; ?>">back</a>
     <br/>
-    <form action="outcome_service.php" method="POST">
+    <form action="service-calls/outcome_service.php" method="POST">
         <input type="hidden" name="url" value="<?php echo $lis_outcome_service_url; ?>"/>
         <input type="hidden" name="sourceId" value="<?php echo $lis_result_sourcedid; ?>"/>
         <input type="hidden" name="consumerKey" value="<?php echo $oauth_consumer_key; ?>"/>
