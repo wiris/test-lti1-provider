@@ -1,16 +1,13 @@
 <?php
 // https://www.imsglobal.org/specs/ltimemv1p0/specification-3
-include "lib/oauthsign.php";
+include "../lib/oauthsign.php";
 
-$a=file_get_contents(dirname(__FILE__)."/outcome.template.xml");
 $url = $_POST["url"];
-//$url  = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
-//$url .= $_SERVER['SERVER_NAME'];
-//$url .= $_SERVER['REQUEST_URI'];
-//$url=dirname($url)."/echo.php";
-echo "URL".$url."<br/>";
+echo "<b>URL: </b>".$url."<br/>";
+
 $consumerKey = $_POST["consumerKey"];
 
+// Build header and signature
 $params = array(
     "oauth_consumer_key"=>$consumerKey,
     "oauth_timestamp"=>"".time(),
@@ -31,15 +28,22 @@ foreach ($params as $key=>$value) {
 // Moodle only uses oauth_consumer_key and oauth_signature
 $request_headers=array('Authorization: OAuth '.$authstr,
     "Accept: application/vnd.ims.lis.v2.membershipcontainer+json");
+echo "<b>Headers: </b>";
 var_dump($request_headers);
 
+// Execute the http call to the service
 $rq = curl_init($url);
 curl_setopt($rq, CURLOPT_HTTPHEADER, $request_headers);
 
 curl_setopt($rq, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($rq, CURLOPT_SSL_VERIFYPEER, 0);
 
+echo "<br/><b>Result:</b> ";
 $r = curl_exec($rq);
+
+// Show results
+echo "<br/><b>Result status:</b> ";
 echo var_dump($r);
+echo "<br/><b>Error:</b> ";
 echo curl_error($rq);
 curl_close($rq);
